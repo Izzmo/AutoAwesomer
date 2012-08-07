@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
- * Created by Izzmo, http://ttaa.codeplex.com
- * Last Updated: March 22nd, 2012
+ * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
+ * Last Updated: August 7th, 2012
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -66,11 +66,11 @@ $(document).ready(function() {
         return b.promise();
     },
     listener: function(d) {
-      if(d.command == "newsong" && d.room.metadata.current_dj != izzmo.ttObj.selfId) {
+      if(d.command == 'newsong' && d.room.metadata.current_dj != izzmo.ttObj.selfId) {
         clearTimeout(window.izzmo.awesomer);
         clearInterval(window.izzmo.arcInt);
         window.izzmo.lamed = false;
-        var timeAmt = Math.floor(Math.random()*window.izzmo.ttObj.currentSong.metadata.length/2*1000);
+        var timeAmt = Math.floor(Math.random()*window.izzmo.ttObj.currentSong.metadata.length/4*1000);
         window.izzmo.botMessage.find('span').html('');
         window.izzmo.awesomer = setTimeout(function() {
           window.izzmo.vote('up');
@@ -92,6 +92,14 @@ $(document).ready(function() {
           window.izzmo.setArc(window.izzmo.deg, false);
           window.izzmo.deg += window.izzmo.degAmt;
         }, 50);
+      }
+      else if(d.command == 'update_votes') {
+        $.each(d.room.metadata.votelog, function() {
+          if(this[0] == window.turntable.user.id) {
+            window.izzmo.stop();
+            window.izzmo.setArc(180, this[1] == "down");
+          }
+        });     
       }
     },
     setArc: function(degree, red) {
@@ -120,6 +128,21 @@ $(document).ready(function() {
       clearTimeout(window.izzmo.awesomer);
       clearInterval(window.izzmo.arcInt);
       window.izzmo.arcInt = 0;
+    },
+    awesome: function() {
+      window.izzmo.vote('up');
+      window.izzmo.stop();
+      window.izzmo.setArc(180, false);
+    },
+    lame: function() {
+      if(!window.izzmo.lamed) {
+        window.izzmo.vote('up');
+        window.izzmo.stop();
+        window.izzmo.botMessage.find('span').html("Song lamed! Awesomering will resume next song.");
+        window.izzmo.lamed = true;
+      }
+      window.izzmo.setArc(180, true);
+      setTimeout(function() {window.izzmo.vote('down');}, 250);
     },
     init: function() {
       $('.roomView').ready(function() {
@@ -156,40 +179,25 @@ $(document).ready(function() {
           fontSize: '10px',
           fontFace: 'Verdana'
         });
-
-        if(!$('#bot-message').length) {
-          $('.header').append(window.izzmo.botMessage);
-
-          window.izzmo.botMessage.find('a').click(function(e) {
-            e.preventDefault();
-            window.izzmo.destruct();
-            window.turntable.removeEventListener("message", window.izzmo.listener);
-            window.izzmo = null;
-          });
-        }
+        $('.header').append(window.izzmo.botMessage);
+        
+        window.izzmo.botMessage.find('a').click(function(e) {
+          e.preventDefault();
+          window.izzmo.destruct();
+          window.turntable.removeEventListener("message", window.izzmo.listener);
+          window.izzmo = null;
+        });
 
         var buttons = $('.roomView > div:nth-child(2) a[id]'); // 1st is Awesome button, 2nd is Lame
-        $(buttons[1]).unbind(); // cancel TT's default callback for the button, add in our own.
+        $(buttons[1]).unbind(); // cancel TT's default callback for the lame button, add in our own.
         $(buttons[1]).bind('click', function() {
-          if(!window.izzmo.lamed) {
-            window.izzmo.vote('up');
-            window.izzmo.stop();
-            window.izzmo.botMessage.find('span').html("Song lamed! Awesomering will resume next song.");
-            window.izzmo.lamed = true;
-          }
-          window.izzmo.setArc(180, true);
-          setTimeout(function() {window.izzmo.vote('down');}, 250);
-        });
-        $(buttons[0]).bind('click', function() {
-            window.izzmo.stop();
-            window.izzmo.setArc(180, false);    
+          window.izzmo.lame();
         });
 
         turntable.addEventListener("message", window.izzmo.listener);
-        window.izzmo.vote('up');
-        window.izzmo.setArc(180, false);
+        window.izzmo.awesome(); // automatically awesome the song upon load
 
-        // Timer for resetting TurnTable's AFK Timers
+        // Timer for resetting Turntable's AFK Timers
         // Runs every 60 seconds
         window.izzmo.botResetAFKTimer = setInterval(function() {
           $($('form input:last')[0]).keydown();

@@ -18,6 +18,12 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### August 7th, 2012
+* Updated CodePlex link to Github repository page.
+* The time it takes to awesome a song now happens in a quarter-length of the song time or less instead of half the length of the song.
+* We have officially moved to Github and all files are now _open sourced_!
+* When you awesome the song by some other means, wether from the CLI in [TTEnhanced](http://github.com/izzmo/TTEnhanced) or another UI, it should not see that action and put the vote bar to full.
+
 ### March 26th, 2012
 Fixed a bug not allowing the auto-awesome to start.
 
