@@ -206,7 +206,7 @@ $(document).ready(function() {
             console.log('New Room found, reinitializing...');
             window.izzmo.destruct();
             if(window.izzmo.showArc) {
-              var meterObj = $('#meterGauge');
+              var meterObj = $('#awesome-meter');
               var check = setInterval(function() {
                 if(meterObj.length > 0 && meterObj.css('display') != 'none') {
                   window.izzmo.init();
