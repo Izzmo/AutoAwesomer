@@ -104,10 +104,10 @@ $(document).ready(function() {
     },
     setArc: function(degree, red) {
       if(!window.izzmo.showArc) return;
-      var context = window.izzmo.arc[0].getContext('2d');
+      var context = window.izzmo.arc[0].getContext('2d'), $arc = $(window.izzmo.arc);
       context.clearRect(0, 0, 100, 100);
       context.beginPath();
-      context.arc(39, 35, 32, -Math.PI, degree*Math.PI/180 - Math.PI, false);
+      context.arc($arc.width()/2, $arc.height()+4, $arc.height(), -Math.PI, degree*Math.PI/180 - Math.PI, false);
       context.lineWidth = 2;
       if(red)
         context.strokeStyle = 'rgb(255, 0, 0)';
@@ -155,7 +155,7 @@ $(document).ready(function() {
         var meterObj = $('#awesome-meter');
         if(meterObj.length > 0 && meterObj.css('display') != 'none') {
           var meter = meterObj.position();
-          window.izzmo.arc = $('<canvas id="izzmo-arc" width="75" height="30" style="overflow: hidden; position: absolute; z-index: 20000; top: ' + meter.top + 'px; left: ' + meter.left + 'px;">Izzmo\'s AutoAwesome</canvas>');
+          window.izzmo.arc = $('<canvas id="izzmo-arc" width="' + meterObj.width() + '" height="' + parseInt(meterObj.height()*0.39) + '" style="overflow: hidden; position: absolute; z-index: 20000; top: ' + meter.top + 'px; left: ' + meter.left + 'px;">Izzmo\'s AutoAwesome</canvas>');
           window.izzmo.arc.prependTo(meterObj.parent());
           window.izzmo.showArc = true;
         }
