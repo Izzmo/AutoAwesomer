@@ -107,7 +107,7 @@ $(document).ready(function() {
       var context = window.izzmo.arc[0].getContext('2d'), $arc = $(window.izzmo.arc);
       context.clearRect(0, 0, 100, 100);
       context.beginPath();
-      context.arc($arc.width()/2, $arc.height()+4, $arc.height(), -Math.PI, degree*Math.PI/180 - Math.PI, false);
+      context.arc($arc.width()/2, $arc.height()+5, $arc.height()+2, -Math.PI, degree*Math.PI/180 - Math.PI, false);
       context.lineWidth = 2;
       if(red)
         context.strokeStyle = 'rgb(255, 0, 0)';
