@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: August 7th, 2012
+ * Last Updated: November 14th, 2012
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -66,7 +66,7 @@ $(document).ready(function() {
         return b.promise();
     },
     listener: function(d) {
-      if(d.command == 'newsong' && d.room.metadata.current_dj != izzmo.ttObj.selfId) {
+      if(d.command == 'newsong' && d.room.metadata.current_dj != window.turntable.user.id) {
         clearTimeout(window.izzmo.awesomer);
         clearInterval(window.izzmo.arcInt);
         window.izzmo.lamed = false;
@@ -105,10 +105,10 @@ $(document).ready(function() {
     setArc: function(degree, red) {
       if(!window.izzmo.showArc) return;
       var context = window.izzmo.arc[0].getContext('2d');
-      context.clearRect(0, 0, 1000, 500);
+      context.clearRect(0, 0, 100, 100);
       context.beginPath();
-      context.arc(203, 162, 137, -Math.PI, degree*Math.PI/180 - Math.PI, false);
-      context.lineWidth = 5;
+      context.arc(39, 35, 32, -Math.PI, degree*Math.PI/180 - Math.PI, false);
+      context.lineWidth = 2;
       if(red)
         context.strokeStyle = 'rgb(255, 0, 0)';
       else
@@ -146,20 +146,17 @@ $(document).ready(function() {
     },
     init: function() {
       $('.roomView').ready(function() {
-        for(var prop in window.turntable) {
-          if(window.turntable[prop] != undefined && window.turntable[prop].hasOwnProperty('currentDj'))
-            window.izzmo.ttObj = window.turntable[prop];
-        }
+        window.izzmo.ttObj = window.turntable.buddyList.room;
         if(window.izzmo.ttObj === null) {
           alert('Could not find turntable.fm objects. You should refresh your page and try again.');
           return;
         }
         window.izzmo.room = window.location.pathname;
-        var meterObj = $('#meterGauge');
+        var meterObj = $('#awesome-meter');
         if(meterObj.length > 0 && meterObj.css('display') != 'none') {
-          var meter = $('#meterGauge').position();
-          window.izzmo.arc = $('<canvas id="izzmo-arc" width="406" height="158" style="overflow: hidden; position: absolute; z-index: 20000; top: ' + meter.top + 'px; left: ' + meter.left + 'px;">Izzmo\'s AutoAwesome</canvas>');
-          $($('.roomView > div')[1]).prepend(window.izzmo.arc);
+          var meter = meterObj.position();
+          window.izzmo.arc = $('<canvas id="izzmo-arc" width="75" height="30" style="overflow: hidden; position: absolute; z-index: 20000; top: ' + meter.top + 'px; left: ' + meter.left + 'px;">Izzmo\'s AutoAwesome</canvas>');
+          window.izzmo.arc.prependTo(meterObj.parent());
           window.izzmo.showArc = true;
         }
         else
@@ -167,9 +164,11 @@ $(document).ready(function() {
 
         window.izzmo.botMessage = $('<div id="bot-message">Izzmo\'s AutoAwesome. <span style="font-style: italic;"></span> <a href="#" style="text-decoration: none; color: red; font-weight: bold;">Turn off</a></div>');
         window.izzmo.botMessage.css({
-          position: 'fixed',
+          position: 'absolute',
+          left: '3px',
+          top: '44px',
+          width: '100%',
           color: 'white',
-          top: '0px',
           zIndex: '5000',
           textAlign: 'left',
           paddingLeft: '2px',
@@ -179,7 +178,7 @@ $(document).ready(function() {
           fontSize: '10px',
           fontFace: 'Verdana'
         });
-        $('.header').append(window.izzmo.botMessage);
+        $('#header div.info').append(window.izzmo.botMessage);
         
         window.izzmo.botMessage.find('a').click(function(e) {
           e.preventDefault();
@@ -188,9 +187,8 @@ $(document).ready(function() {
           window.izzmo = null;
         });
 
-        var buttons = $('.roomView > div:nth-child(2) a[id]'); // 1st is Awesome button, 2nd is Lame
-        $(buttons[1]).unbind(); // cancel TT's default callback for the lame button, add in our own.
-        $(buttons[1]).bind('click', function() {
+        // cancel TT's default callback for the lame button, add in our own.
+        $('#lame-button').unbind().bind('click', function() {
           window.izzmo.lame();
         });
 

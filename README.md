@@ -18,6 +18,11 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### November 14th, 2012
+* Updated the code for the new Turntable.fm interface.
+* Some of the API calls and variables were changed slightly.
+* Moved the Awesome Arc to the new location of the interface (now smaller as well).
+
 ### August 7th, 2012
 * Updated CodePlex link to Github repository page.
 * The time it takes to awesome a song now happens in a quarter-length of the song time or less instead of half the length of the song.
