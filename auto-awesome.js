@@ -25,6 +25,7 @@ $(document).ready(function() {
       window.izzmo.socket({
           api: "room.vote",
           roomid: window.izzmo.ttObj.roomId,
+          section: window.izzmo.ttObj.section,
           val: c,
           vh: f,
           th: d,
