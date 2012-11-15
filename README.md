@@ -18,6 +18,9 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### November 15th, 2012
+* Fixed bug not allowing someone to vote in a big room if they were not in the main section.
+
 ### November 14th, 2012
 * Updated the code for the new Turntable.fm interface.
 * Some of the API calls and variables were changed slightly.
