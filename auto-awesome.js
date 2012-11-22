@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: November 21st, 2012
+ * Last Updated: November 22nd, 2012
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -98,7 +98,8 @@ $(document).ready(function() {
         $.each(d.room.metadata.votelog, function() {
           if(this[0] == window.turntable.user.id) {
             window.izzmo.stop();
-            window.izzmo.setArc(180, this[1] == "down");
+            window.izzmo.setArc(180, 'down' === this[1]);
+            return false;
           }
         });     
       }
