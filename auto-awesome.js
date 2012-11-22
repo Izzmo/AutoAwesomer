@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: November 14th, 2012
+ * Last Updated: November 21st, 2012
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -199,7 +199,7 @@ $(document).ready(function() {
         // Timer for resetting Turntable's AFK Timers
         // Runs every 60 seconds
         window.izzmo.botResetAFKTimer = setInterval(function() {
-          $($('form input:last')[0]).keydown();
+          $(window).focus();
         }, 60000);
 
         window.izzmo.watcher = setInterval(function() {

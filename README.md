@@ -18,6 +18,9 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### November 21st, 2012
+* Fixed bug where AFK timer was not working.
+
 ### November 15th, 2012
 * Fixed bug not allowing someone to vote in a big room if they were not in the main section.
 
