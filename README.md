@@ -18,6 +18,9 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### December 4th, 2012
+Added debugging messages so we can better recognize where a problem is occurring.
+
 ### November 27th, 2012
 Updated the screenshot of the AutoAwesomer.
 

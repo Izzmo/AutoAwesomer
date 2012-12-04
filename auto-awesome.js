@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: November 22nd, 2012
+ * Last Updated: December 4th, 2012
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -147,6 +147,7 @@ $(document).ready(function() {
       setTimeout(function() {window.izzmo.vote('down');}, 250);
     },
     init: function() {
+      console.log('Initializing AutoAwesomer.');
       $('.roomView').ready(function() {
         window.izzmo.ttObj = window.turntable.buddyList.room;
         if(window.izzmo.ttObj === null) {
@@ -154,6 +155,7 @@ $(document).ready(function() {
           return;
         }
         window.izzmo.room = window.location.pathname;
+        console.log('Setting up awesome meter...');
         var meterObj = $('#awesome-meter');
         if(meterObj.length > 0 && meterObj.css('display') != 'none') {
           var meter = meterObj.position();
@@ -163,7 +165,8 @@ $(document).ready(function() {
         }
         else
           window.izzmo.showArc = false;
-
+        
+        console.log('Configuring AutoAwesomer message bar...');
         window.izzmo.botMessage = $('<div id="bot-message">Izzmo\'s AutoAwesome. <span style="font-style: italic;"></span> <a href="#" style="text-decoration: none; color: red; font-weight: bold;">Turn off</a></div>');
         window.izzmo.botMessage.css({
           position: 'absolute',
@@ -182,6 +185,7 @@ $(document).ready(function() {
         });
         $('#header div.info').append(window.izzmo.botMessage);
         
+        console.log('Setting up AutoAwesomer click events...');
         window.izzmo.botMessage.find('a').click(function(e) {
           e.preventDefault();
           window.izzmo.destruct();
@@ -199,6 +203,7 @@ $(document).ready(function() {
 
         // Timer for resetting Turntable's AFK Timers
         // Runs every 60 seconds
+        console.log('Turning on AutoAwesomer anti-idle.');
         window.izzmo.botResetAFKTimer = setInterval(function() {
           $(window).focus();
         }, 60000);
@@ -219,9 +224,11 @@ $(document).ready(function() {
             }
           }
         }, 3000);
+        console.log('AutoAwesomer setup complete.');
       });
     },
     destruct: function() {
+      console.log('Turning off AutoAwesomer.');
       clearInterval(window.izzmo.botResetAFKTimer);
       clearInterval(window.izzmo.watcher);
       window.izzmo.stop();
