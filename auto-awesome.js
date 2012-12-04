@@ -155,7 +155,7 @@ $(document).ready(function() {
           return;
         }
         window.izzmo.room = window.location.pathname;
-        console.log('Setting up awesome meter...');
+        console.log('Setting up AwesomeArc...');
         var meterObj = $('#awesome-meter');
         if(meterObj.length > 0 && meterObj.css('display') != 'none') {
           var meter = meterObj.position();
