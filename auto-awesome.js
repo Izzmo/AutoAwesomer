@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: November 14th, 2012
+ * Last Updated: May 7th, 2013
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -25,6 +25,7 @@ $(document).ready(function() {
       window.izzmo.socket({
           api: "room.vote",
           roomid: window.izzmo.ttObj.roomId,
+          section: window.izzmo.ttObj.section,
           val: c,
           vh: f,
           th: d,
@@ -97,7 +98,8 @@ $(document).ready(function() {
         $.each(d.room.metadata.votelog, function() {
           if(this[0] == window.turntable.user.id) {
             window.izzmo.stop();
-            window.izzmo.setArc(180, this[1] == "down");
+            window.izzmo.setArc(180, 'down' === this[1]);
+            return false;
           }
         });     
       }
@@ -107,7 +109,7 @@ $(document).ready(function() {
       var context = window.izzmo.arc[0].getContext('2d'), $arc = $(window.izzmo.arc);
       context.clearRect(0, 0, 100, 100);
       context.beginPath();
-      context.arc($arc.width()/2, $arc.height()+5, $arc.height()+2, -Math.PI, degree*Math.PI/180 - Math.PI, false);
+      context.arc($arc.width()/2, $arc.height()+7, $arc.height()+2, -Math.PI, degree*Math.PI/180 - Math.PI, false);
       context.lineWidth = 2;
       if(red)
         context.strokeStyle = 'rgb(255, 0, 0)';
@@ -145,6 +147,7 @@ $(document).ready(function() {
       setTimeout(function() {window.izzmo.vote('down');}, 250);
     },
     init: function() {
+      console.log('Initializing AutoAwesomer.');
       $('.roomView').ready(function() {
         window.izzmo.ttObj = window.turntable.buddyList.room;
         if(window.izzmo.ttObj === null) {
@@ -152,16 +155,21 @@ $(document).ready(function() {
           return;
         }
         window.izzmo.room = window.location.pathname;
+        console.log('Setting up AwesomeArc...');
         var meterObj = $('#awesome-meter');
-        if(meterObj.length > 0 && meterObj.css('display') != 'none') {
-          var meter = meterObj.position();
-          window.izzmo.arc = $('<canvas id="izzmo-arc" width="' + meterObj.width() + '" height="' + parseInt(meterObj.height()*0.39) + '" style="overflow: hidden; position: absolute; z-index: 20000; top: ' + meter.top + 'px; left: ' + meter.left + 'px;">Izzmo\'s AutoAwesome</canvas>');
+        if(meterObj.length && meterObj.css('display') != 'none') {
+          var top = meterObj[0].style.top,
+              left = meterObj[0].style.left;
+          window.izzmo.arc = $('<canvas id="izzmo-arc" width="' + meterObj.width() + '" height="' + parseInt(meterObj.height()*0.39) + '" style="overflow: hidden; position: absolute; z-index: 20000; top: ' + top + '; left: ' + left + ';">Izzmo\'s AutoAwesome</canvas>');
           window.izzmo.arc.prependTo(meterObj.parent());
           window.izzmo.showArc = true;
         }
-        else
+        else {
+          console.log('Could not find awesome-meter.');
           window.izzmo.showArc = false;
-
+        }
+        
+        console.log('Configuring AutoAwesomer message bar...');
         window.izzmo.botMessage = $('<div id="bot-message">Izzmo\'s AutoAwesome. <span style="font-style: italic;"></span> <a href="#" style="text-decoration: none; color: red; font-weight: bold;">Turn off</a></div>');
         window.izzmo.botMessage.css({
           position: 'absolute',
@@ -180,6 +188,7 @@ $(document).ready(function() {
         });
         $('#header div.info').append(window.izzmo.botMessage);
         
+        console.log('Setting up AutoAwesomer click events...');
         window.izzmo.botMessage.find('a').click(function(e) {
           e.preventDefault();
           window.izzmo.destruct();
@@ -197,8 +206,9 @@ $(document).ready(function() {
 
         // Timer for resetting Turntable's AFK Timers
         // Runs every 60 seconds
+        console.log('Turning on AutoAwesomer anti-idle.');
         window.izzmo.botResetAFKTimer = setInterval(function() {
-          $($('form input:last')[0]).keydown();
+          $(window).focus();
         }, 60000);
 
         window.izzmo.watcher = setInterval(function() {
@@ -217,9 +227,11 @@ $(document).ready(function() {
             }
           }
         }, 3000);
+        console.log('AutoAwesomer setup complete.');
       });
     },
     destruct: function() {
+      console.log('Turning off AutoAwesomer.');
       clearInterval(window.izzmo.botResetAFKTimer);
       clearInterval(window.izzmo.watcher);
       window.izzmo.stop();
