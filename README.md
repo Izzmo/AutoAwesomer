@@ -1,5 +1,5 @@
 #Izzmo's Turntable.fm Auto Awesomer
-![Izzmo's AutoAwesome](http://www.pinnacleofdestruction.net/tt/images/aa-small.png)
+![Izzmo's AutoAwesome](http://www.pinnacleofdestruction.net/tt/images/izzmo-aa-turntablefm.png)
 
 This script allows you to enjoy turntable.fm music without getting paranoid about voting for every song, which you should be doing! Instead, forget the hassle and turn this on to have the songs you listen to get voted awesome automatically!
 
@@ -17,6 +17,23 @@ If you do not like a song, simply go back to the turntable.fm room tab and click
 In order to use the AutoAwesomer, please visit our website at http://izzmo.com/tt/ for instructions on how to add it to your bookmarks bar and get it up and running.
 
 ## Changelog
+
+### May 7th, 2013
+* Added console debugging.
+* Fixed issue with non-idle.
+* Updated position of AwesomeArc so it was center and proper. (For Turntable.fm's update for zooming/panning)
+
+### December 4th, 2012
+Added debugging messages so we can better recognize where a problem is occurring.
+
+### November 27th, 2012
+Updated the screenshot of the AutoAwesomer.
+
+### November 21st, 2012
+Fixed bug where AFK timer was not working.
+
+### November 15th, 2012
+Fixed bug not allowing someone to vote in a big room if they were not in the main section.
 
 ### November 14th, 2012
 * Updated the code for the new Turntable.fm interface.
