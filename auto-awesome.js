@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: May 7th, 2013
+ * Last Updated: July 16th, 2013
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -107,7 +107,7 @@ $(document).ready(function() {
     setArc: function(degree, red) {
       if(!window.izzmo.showArc) return;
       var context = window.izzmo.arc[0].getContext('2d'), $arc = $(window.izzmo.arc);
-      context.clearRect(0, 0, 100, 100);
+      context.clearRect(0, 0, 1000, 1000);
       context.beginPath();
       context.arc($arc.width()/2, $arc.height()+7, $arc.height()+2, -Math.PI, degree*Math.PI/180 - Math.PI, false);
       context.lineWidth = 2;
@@ -156,7 +156,7 @@ $(document).ready(function() {
         }
         window.izzmo.room = window.location.pathname;
         console.log('Setting up AwesomeArc...');
-        var meterObj = $('#awesome-meter');
+        var meterObj = $('.awesome-meter').first();
         if(meterObj.length && meterObj.css('display') != 'none') {
           var top = meterObj[0].style.top,
               left = meterObj[0].style.left;
@@ -173,8 +173,8 @@ $(document).ready(function() {
         window.izzmo.botMessage = $('<div id="bot-message">Izzmo\'s AutoAwesome. <span style="font-style: italic;"></span> <a href="#" style="text-decoration: none; color: red; font-weight: bold;">Turn off</a></div>');
         window.izzmo.botMessage.css({
           position: 'absolute',
-          left: '3px',
-          top: '44px',
+          left: '68px',
+          top: '-17px',
           width: '100%',
           color: 'white',
           zIndex: '5000',
@@ -186,7 +186,7 @@ $(document).ready(function() {
           fontSize: '10px',
           fontFace: 'Verdana'
         });
-        $('#header div.info').append(window.izzmo.botMessage);
+        $('.header-content').first().append(window.izzmo.botMessage);
         
         console.log('Setting up AutoAwesomer click events...');
         window.izzmo.botMessage.find('a').click(function(e) {

@@ -18,6 +18,11 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### July 16th, 2013
+* Fixed issue with awesome-arc not displaying due to Turntable.fm's UI update.
+* Fixed issue with status bar not showing up due to Turntable.fm's UI update.
+* Fixed issue where after a few songs, part of the awesome-arc will not get cleared and create a large bulge of green.
+
 ### May 7th, 2013
 * Added console debugging.
 * Fixed issue with non-idle.
