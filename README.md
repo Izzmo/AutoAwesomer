@@ -18,6 +18,9 @@ In order to use the AutoAwesomer, please visit our website at http://izzmo.com/t
 
 ## Changelog
 
+### August 2nd, 2013
+Fixed problem with AutoAwesomer reloading when viewing user profiles.
+
 ### July 16th, 2013
 * Fixed issue with awesome-arc not displaying due to Turntable.fm's UI update.
 * Fixed issue with status bar not showing up due to Turntable.fm's UI update.
