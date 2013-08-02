@@ -1,7 +1,7 @@
 /**
  * Turntable.fm Auto Awesome Script
  * Created by Izzmo, http://github.com/izzmo/AutoAwesomer
- * Last Updated: July 16th, 2013
+ * Last Updated: August 2nd, 2013
  * 
  * If you have any questions or concerns,
  * please email me: me@izzmo.com, or find
@@ -212,7 +212,7 @@ $(document).ready(function() {
         }, 60000);
 
         window.izzmo.watcher = setInterval(function() {
-          if(window.location.pathname != window.izzmo.room) {
+          if(/^\/[a-zA-Z0-9_]+$/.test(window.location.pathname) && window.location.pathname != window.izzmo.room) {
             console.log('New Room found, reinitializing...');
             window.izzmo.destruct();
             if(window.izzmo.showArc) {
